@@ -25,7 +25,7 @@ top_srcdir=`cd $srcdir/.. >/dev/null; pwd`
 : ${XCLIENT_OUT=$TESTNAME-xclient-out.log}
 
 # Display number
-: ${TEST_DISPLAY=:20}
+: ${TEST_DISPLAY=:$(expr $$ + 20)}
 
 # Timeout in seconds
 : ${XORG_START_TIMEOUT=3}
