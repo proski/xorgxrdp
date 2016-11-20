@@ -22,7 +22,6 @@ top_srcdir=`cd $srcdir/.. >/dev/null; pwd`
 # Output files
 : ${XORG_LOG=$TESTNAME-xorg.log}
 : ${XORG_OUT=$TESTNAME-xorg-out.log}
-: ${XORG_ERR=$TESTNAME-xorg-err.log}
 : ${XCLIENT_OUT=$TESTNAME-xclient-out.log}
 
 # Display number
@@ -63,7 +62,7 @@ $XORG \
   -config $top_srcdir/xrdpdev/xorg.conf \
   -logfile $XORG_LOG \
   -novtswitch -sharevts -once -terminate -ac \
-  $TEST_DISPLAY $XORG_ARGS >$XORG_OUT 2>$XORG_ERR </dev/null &
+  $TEST_DISPLAY $XORG_ARGS >$XORG_OUT 2>&1 </dev/null &
 
 # Record Xorg PID so it can be killed
 XORG_PID=$!
