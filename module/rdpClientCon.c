@@ -1290,7 +1290,7 @@ rdpClientConEndUpdate(rdpPtr dev, rdpClientCon *clientCon)
 }
 
 /******************************************************************************/
-int
+static int
 rdpClientConPreCheck(rdpPtr dev, rdpClientCon *clientCon, int in_size)
 {
     int rv;
