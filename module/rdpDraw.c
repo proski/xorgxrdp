@@ -211,32 +211,6 @@ GetTextBoundingBox(DrawablePtr pDrawable, FontPtr font, int x, int y,
 
 /******************************************************************************/
 int
-rdpDrawItemAdd(rdpPtr dev, rdpPixmapRec *priv, struct rdp_draw_item *di)
-{
-    priv->is_alpha_dirty_not = FALSE;
-
-    if (priv->draw_item_tail == NULL)
-    {
-        priv->draw_item_tail = di;
-        priv->draw_item_head = di;
-    }
-    else
-    {
-        di->prev = priv->draw_item_tail;
-        priv->draw_item_tail->next = di;
-        priv->draw_item_tail = di;
-    }
-
-    if (priv == &(dev->screenPriv))
-    {
-        rdpClientConScheduleDeferredUpdate(dev);
-    }
-
-    return 0;
-}
-
-/******************************************************************************/
-int
 rdpDrawItemRemove(rdpPtr dev, rdpPixmapRec *priv, struct rdp_draw_item *di)
 {
     if (di->prev != NULL)
