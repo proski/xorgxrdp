@@ -511,7 +511,6 @@ xrdpVidPutImage(ScrnInfoPtr pScrn,
     rgborg32 = (int *) RDPALIGN(dev->xv_data, 16);
     rgbend32 = rgborg32 + width * height;
     rgbend32 = (int *) RDPALIGN(rgbend32, 16);
-    error = 0;
 
     switch (format)
     {

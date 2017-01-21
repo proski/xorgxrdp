@@ -288,7 +288,6 @@ KbdAddEvent(rdpKeyboard *keyboard, int down, int param1, int param2,
     rdp_scancode = param3;
     is_ext = param4 & 256; /* 0x100 */
     is_spe = param4 & 512; /* 0x200 */
-    x_scancode = 0;
 
     switch (rdp_scancode)
     {
