@@ -59,6 +59,9 @@ Client connection to xrdp
 #define USE_MAX_OS_BYTES 1
 #define MAX_OS_BYTES (16 * 1024 * 1024)
 
+#define INPUT_STREAM_SIZE 8192
+#define OUTPUT_STREAM_SIZE (8192 * 4 + 100)
+
 /*
 0 GXclear,        0
 1 GXnor,          DPon
@@ -160,9 +163,9 @@ rdpClientConGotConnection(ScreenPtr pScreen, rdpPtr dev)
     dev->do_dirty_ons = 1;
 
     make_stream(clientCon->in_s);
-    init_stream(clientCon->in_s, 8192);
+    init_stream(clientCon->in_s, INPUT_STREAM_SIZE);
     make_stream(clientCon->out_s);
-    init_stream(clientCon->out_s, 8192 * 4 + 100);
+    init_stream(clientCon->out_s, OUTPUT_STREAM_SIZE);
 
     new_sck = g_sck_accept(dev->listen_sck);
     if (new_sck == -1)
@@ -1276,7 +1279,7 @@ rdpClientConBeginUpdate(rdpPtr dev, rdpClientCon *clientCon)
         {
             return 0;
         }
-        init_stream(clientCon->out_s, 0);
+        init_stream(clientCon->out_s, OUTPUT_STREAM_SIZE);
         s_push_layer(clientCon->out_s, iso_hdr, 8);
         out_uint16_le(clientCon->out_s, 1); /* begin update */
         out_uint16_le(clientCon->out_s, 4); /* size */
@@ -1331,7 +1334,7 @@ rdpClientConPreCheck(rdpPtr dev, rdpClientCon *clientCon, int in_size)
             rv = 1;
         }
         clientCon->count = 0;
-        init_stream(clientCon->out_s, 0);
+        init_stream(clientCon->out_s, OUTPUT_STREAM_SIZE);
         s_push_layer(clientCon->out_s, iso_hdr, 8);
     }
 
