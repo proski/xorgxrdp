@@ -20,3 +20,18 @@ xrdpdevsysconfdir=$(sysconfdir)/X11/xrdp
 dist_xrdpdevsysconf_DATA = \
   xorg.conf
 
+sbin_SCRIPTS = xorgxrdp
+
+SUBST_VARS = sed \
+   -e 's|@PACKAGE_VERSION[@]|$(PACKAGE_VERSION)|g' \
+   -e 's|@xrdpdevsysconfdir[@]|$(xrdpdevsysconfdir)|g'
+
+subst_verbose = $(subst_verbose_@AM_V@)
+subst_verbose_ = $(subst_verbose_@AM_DEFAULT_V@)
+subst_verbose_0 = @echo "  SUBST    $@";
+
+SUFFIXES = .in
+.in:
+	$(subst_verbose)$(SUBST_VARS) $< > $@
+
+CLEANFILES = $(sbin_SCRIPTS)

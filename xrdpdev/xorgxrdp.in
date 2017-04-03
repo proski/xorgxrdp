@@ -1,0 +1,13 @@
+#! /bin/sh
+
+# TODO:
+# Xorg selection
+# Setting default Xorg in configure
+# Support for --help and --version
+# Setuid bit suppression?
+# Move xorg.conf outside /etc, rename it
+# Manual page
+
+XORG=$Xorg
+
+exec Xorg -config @xrdpdevsysconfdir@/xorg.conf "$@"
